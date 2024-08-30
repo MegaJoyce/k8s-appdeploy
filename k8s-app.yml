@@ -26,7 +26,7 @@ spec:
       initContainers:
         - name: init-mydb
           image: busybox:latest
-          command: ["sh", "-c", "until nslookup k8s-app-db; do echo waiting for mydb; sleep 2; done;"]
+          command: ["sh", "-c", "until nslookup vprodb -q=A; do echo waiting for mydb; sleep 2; done;"]
         - name: init-memcached
           image: busybox:latest
-          command: ["sh", "-c", "until nslookup k8s-app-mc; do echo waiting for memcached; sleep 2; done;"]
+          command: ["sh", "-c", "until nslookup vprocache01 -q=A; do echo waiting for memcached; sleep 2; done;"]
