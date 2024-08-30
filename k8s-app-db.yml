@@ -41,7 +41,7 @@ spec:
       volumes:
         - name: k8s-app-volume
           awsElasticBlockStore:
-            volumeID: vvol-0ca5ab8845cd3c9a2
+            volumeID: vol-0ca5ab8845cd3c9a2
             fsType: ext4
     
       initContainers:
