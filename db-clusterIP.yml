@@ -4,8 +4,6 @@ metadata:
   # the name should be aligned with the application.properties
   name: vprodb
 spec:
-  selector:
-    app: myapp
   ports:
   - port: 3306
     targetPort: k8s-app-db-port
