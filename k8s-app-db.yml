@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-app-db
+  name: vprodb
   labels:
-    app: k8s-app-db
+    app: vprodb
 spec:
   selector:
     matchLabels:
-      app: k8s-app-db
+      app: vprodb
   replicas: 1
   template:
     metadata:
       labels:
-        app: k8s-app-db
+        app: vprodb
     spec:
       containers:
-      - name: k8s-app-db
+      - name: vprodb
         image: vprofile/vprofiledb:V1
         # mount point here
         volumeMounts:
@@ -27,7 +27,7 @@ spec:
         #     cpu: "500m"
         ports:
         - containerPort: 3306
-          name: k8s-app-db-port
+          name: vprodb-port
         env:
         # the value of db-pass will be assgined to MYSQL_ROOT_PASSWORDS
         - name: MYSQL_ROOT_PASSWORD
@@ -41,7 +41,7 @@ spec:
       volumes:
         - name: k8s-app-volume
           awsElasticBlockStore:
-            volumeID: vol-0dbea4731dbf25fef
+            volumeID: vvol-0ca5ab8845cd3c9a2
             fsType: ext4
     
       initContainers:

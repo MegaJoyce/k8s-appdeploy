@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
 # this service name is aligned with the name in the application.properties file.
-  name: k8s-app-mc
+  name: vprocache01
 spec:
   selector:
-    app: k8s-app-mc
+    app: vprocache01
   ports:
     - port: 11211
-      targetPort: k8s-app-mc-port
+      targetPort: vprocache01-port
       protocol: TCP
   type: ClusterIP

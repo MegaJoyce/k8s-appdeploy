@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-app-rmq
+  name: vpromq01
 spec:
   selector:
     matchLabels:
-      app: k8s-app-rmq
+      app: vpromq01
   replicas: 1 
   template:
     metadata:
       labels:
-        app: k8s-app-rmq
+        app: vpromq01
     spec:
       containers:
-      - name: k8s-app-rmq
+      - name: vpromq01
         image: rabbitmq
         # resources:
         #   limits:
@@ -21,7 +21,7 @@ spec:
         #     cpu: "500m"
         ports:
         - containerPort: 15672
-          name: app-rmq-port
+          name: vpromq01-port
         env:
           - name: RABBITMQ_DEFAULT_PASS
             valueFrom:
