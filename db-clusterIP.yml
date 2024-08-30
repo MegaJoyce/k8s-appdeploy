@@ -10,3 +10,4 @@ spec:
     protocol: TCP
   selector:
     app: k8s-app-db
+  type: ClusterIP

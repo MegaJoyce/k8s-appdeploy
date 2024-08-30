@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vpromq01
+spec:
+  selector:
+    app: k8s-app-rmq
+  ports:
+  - port: 15672
+    targetPort: k8s-app-rmq-port
+    protocol: TCP
+  type: ClusterIP

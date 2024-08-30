@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-app-rmq
+spec:
+  selector:
+    matchLabels:
+      app: k8s-app-rmq
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: k8s-app-rmq
+    spec:
+      containers:
+      - name: k8s-app-rmq
+        image: rabbitmq
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 15672
+          name: k8s-app-rmq-port
+        env:
+          - name: RABBITMQ_DEFAULT_PASS
+            valueFrom:
+              secretKeyRef:
+                key: rmq-pass 
+                name: app-secret
+          - name: RABBITMQ_DEFAULT_USER
+            value: "guest"

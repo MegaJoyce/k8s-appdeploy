@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-app
+spec:
+  selector:
+    matchLabels:
+      app: k8s-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-app
+    spec:
+      containers:
+      - name: k8s-app
+        image: vprofile/vprofileapp:V1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          name: k8s-app-port
+      # this init container is to prepare for the lauch of the main container
+      initContainers:
+        - name: init-mydb
+          image: busybox:latest
+          command: ["sh", "-c", "until nslookup vprodb; do echo waiting for mydb; sleep 2; done;"]
+        - name: init-memcached
+          image: busybox:latest
+          command: ["sh", "-c", "until nslookup vprocache01; do echo waiting for memcached; sleep 2; done;"]

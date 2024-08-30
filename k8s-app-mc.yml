@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-app-mc
+spec:
+  selector:
+    matchLabels:
+      app: k8s-app-mc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-app-mc
+    spec:
+      containers:
+      - name: k8s-app-mc
+        image: memcached
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 11211
+          name: k8s-app-mc-port
