@@ -15,10 +15,10 @@ spec:
       containers:
       - name: k8s-app
         image: vprofile/vprofileapp:V1
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
         - containerPort: 8080
           name: k8s-app-port
