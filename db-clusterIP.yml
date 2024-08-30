@@ -8,5 +8,5 @@ spec:
   - port: 3306
     targetPort: k8s-app-db-port
     protocol: TCP
-  selectors:
+  selector:
     app: k8s-app-db
