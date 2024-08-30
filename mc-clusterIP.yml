@@ -7,7 +7,7 @@ spec:
   selector:
     app: k8s-app-mc
   ports:
-  - port: 11211
-    targetPort: k8s-app-mc-port
-    protocal: TCP
+    - port: 11211
+      targetPort: k8s-app-mc-port
+      protocal: TCP
   type: ClusterIP

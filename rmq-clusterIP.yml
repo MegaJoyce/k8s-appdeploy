@@ -6,7 +6,7 @@ spec:
   selector:
     app: k8s-app-rmq
   ports:
-  - port: 15672
-    targetPort: k8s-app-rmq-port
-    protocol: TCP
+    - port: 15672
+      targetPort: app-rmq-port
+      protocol: TCP
   type: ClusterIP

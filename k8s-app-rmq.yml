@@ -21,7 +21,7 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 15672
-          name: k8s-app-rmq-port
+          name: app-rmq-port
         env:
           - name: RABBITMQ_DEFAULT_PASS
             valueFrom:

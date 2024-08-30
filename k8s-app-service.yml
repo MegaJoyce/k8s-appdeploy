@@ -4,11 +4,9 @@ metadata:
   name: k8s-app-service
 spec:
   selector:
-    app: k8s-app-service
-  ports:
-  - port: 80
-    targetPort: k8s-app-port
-    protocol: TCP
-  selectors:
     app: k8s-app
+  ports:
+    - port: 80
+      targetPort: k8s-app-port
+      protocol: TCP
   type: LoadBalancer
