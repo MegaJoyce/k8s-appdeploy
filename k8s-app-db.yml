@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-app-db
+  labels:
+    app: k8s-app-db
+spec:
+  selector:
+    matchLabels:
+      app: k8s-app-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-app-db
+    spec:
+      containers:
+      - name: k8s-app-db
+        image: vprofile/vprofiledb:V1
+        # mount point here
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: k8s-app-volume
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3306
+          name: k8s-app-db-port
+        env:
+        # the value of db-pass will be assgined to MYSQL_ROOT_PASSWORDS
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: db-pass
+      # the db will only be deployed and run on the node with the label: "zone: us-west-1a"
+      nodeSelector:
+        zone: us-west-1a
+      volumes:
+        - name: k8s-app-volume
+          awsElasticBlockStore:
+            volumeID: vol-0dbea4731dbf25fef
+            fsType: ext4
+    
+      initContainers:
+        - name: init-db
+          image: busybox:latest
+          args: ["rm", "-rf" "/var/lib/mysql/lost+found"]
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: k8s-app-volume
